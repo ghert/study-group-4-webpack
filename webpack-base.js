@@ -2,6 +2,8 @@
 
 import CommonsChunkPlugin from 'webpack/lib/optimize/CommonsChunkPlugin';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+
 
 const extractCSS = new ExtractTextPlugin('[name]-[hash].css');
 
@@ -31,6 +33,7 @@ export default {
             name: "commons",
             filename: "commons-[hash].js"
         }),
+        new HtmlWebpackPlugin(),
         extractCSS
     ]
 };
