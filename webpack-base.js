@@ -3,7 +3,7 @@
 import CommonsChunkPlugin from 'webpack/lib/optimize/CommonsChunkPlugin';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-
+import autoprefixer from 'autoprefixer';
 
 const extractCSS = new ExtractTextPlugin('[name]-[hash].css');
 
@@ -20,7 +20,7 @@ export default {
         loaders: [
             { test: /\.js$/, loader: 'babel', exclude: /node_modules/ },
             { test: /\.json/, loader: 'json-loader'},
-            { test: /\.scss$/i, loader: extractCSS.extract(['css-loader','sass-loader']) },
+            { test: /\.scss$/i, loader: extractCSS.extract(['css-loader','sass-loader', 'postcss-loader']) },
             {
                 test: /\.(png|jpg|gif|ico|woff|woff2|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
                 loader: 'file',
@@ -35,5 +35,10 @@ export default {
         }),
         new HtmlWebpackPlugin(),
         extractCSS
-    ]
+    ],
+    postcss: () => {
+        return [
+            autoprefixer
+        ];
+    }
 };
