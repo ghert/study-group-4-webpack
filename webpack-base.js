@@ -1,6 +1,7 @@
 'use strict';
 
 import CommonsChunkPlugin from 'webpack/lib/optimize/CommonsChunkPlugin';
+import { DefinePlugin } from 'webpack';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import SpritesmithPlugin from 'webpack-spritesmith';
@@ -64,6 +65,9 @@ export default {
         algorithm: 'top-down',
         padding: 1
       }
+    }),
+    new DefinePlugin({
+      __PRODUCTION__: process.env.NODE_ENV === 'prod'
     }),
     extractCSS
   ],
