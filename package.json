@@ -4,11 +4,13 @@
   "description": "",
   "main": "webpack.dev.js",
   "scripts": {
-    "start:dev": "npm-run-all clean-dist webpack:dev",
-    "start:prod": "npm-run-all clean-dist webpack:prod",
+    "start": "npm-run-all clean-dist start-dev-server",
+    "build:dev": "npm-run-all clean-dist webpack:dev",
+    "build:prod": "npm-run-all clean-dist webpack:prod",
     "clean-dist": "rimraf ./dist/*",
     "webpack:dev": "NODE_ENV=dev webpack --config webpack-dev.config.babel.js",
-    "webpack:prod": "NODE_ENV=prod webpack --config webpack-prod.config.babel.js"
+    "webpack:prod": "NODE_ENV=prod webpack --config webpack-prod.config.babel.js",
+    "start-dev-server": "NODE_ENV=dev babel-node webpack-dev-server.js"
   },
   "dependencies": {
     "lodash": "^4.17.2"
@@ -34,6 +36,7 @@
     "rimraf": "^2.5.4",
     "sass-loader": "^4.1.1",
     "webpack": "^1.14.0",
+    "webpack-dev-server": "^1.16.2",
     "webpack-spritesmith": "^0.3.1"
   },
   "repository": {
