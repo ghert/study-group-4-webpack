@@ -1,3 +1,5 @@
 node_modules
 dist/*
+images/generated
+src/generated
 .idea

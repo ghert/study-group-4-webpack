@@ -1,4 +1,5 @@
 @import "variables";
+@import "../generated/styles/sprites";
 
 body {
 	color: $main-color;
@@ -14,4 +15,9 @@ h1 {
 
 p {
 	transform: scale(.9);
+}
+
+i {
+	display: inline-block;
+	@include retina-sprite($icon-pink-group);
 }

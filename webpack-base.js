@@ -3,18 +3,20 @@
 import CommonsChunkPlugin from 'webpack/lib/optimize/CommonsChunkPlugin';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import SpritesmithPlugin from 'webpack-spritesmith';
 import autoprefixer from 'autoprefixer';
+import path from 'path';
 
 const extractCSS = new ExtractTextPlugin('[name]-[hash].css');
 
 export default {
     entry: {
-        main: "./src/main.js",
-        unsupported: "./src/unsupported.js"
+        main: './src/main.js',
+        unsupported: './src/unsupported.js'
     },
     output: {
-        path: "./dist",
-        filename: "[name]-[hash].js"
+        path: './dist',
+        filename: '[name]-[hash].js'
     },
     module: {
         loaders: [
@@ -28,12 +30,35 @@ export default {
             }
         ]
     },
+    resolve: {
+        alias: {
+            images: path.resolve( __dirname, 'images' )
+        }
+    },
     plugins: [
         new CommonsChunkPlugin({
-            name: "commons",
-            filename: "commons-[hash].js"
+            name: 'commons',
+            filename: 'commons-[hash].js'
         }),
         new HtmlWebpackPlugin(),
+        new SpritesmithPlugin({
+            retina: '@2x',
+            src: {
+                cwd: './images/sprites',
+                glob: '*.png'
+            },
+            target: {
+                image: './images/generated/sprite.png',
+                css: './src/generated/styles/sprites.scss'
+            },
+            apiOptions: {
+                cssImageRef: `~images/generated/sprite.png`
+            },
+            spritesmithOptions: {
+                algorithm: 'top-down',
+                padding: 1
+            }
+        }),
         extractCSS
     ],
     postcss: () => {
