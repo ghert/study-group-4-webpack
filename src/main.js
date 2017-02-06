@@ -8,3 +8,7 @@ import config from 'config';
 documentWrite(`<h1>${copy.main} [${config.name}] <i></i></h1><p>It works!</p>`);
 
 log('Clamped value: ' + clamp(Math.random(), .25, .75));
+
+if (module.hot) {
+  module.hot.accept();
+}

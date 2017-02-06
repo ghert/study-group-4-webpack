@@ -1,8 +1,8 @@
 'use strict';
 
-import { assign } from 'lodash';
+import { defaultsDeep } from 'lodash';
 import baseConfig from './webpack-base';
 
-export default assign({}, baseConfig, {
+export default defaultsDeep({
 
-});
+}, baseConfig);

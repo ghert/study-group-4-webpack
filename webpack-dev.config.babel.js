@@ -1,11 +1,19 @@
 'use strict';
 
-import { assign } from 'lodash';
+import { defaultsDeep } from 'lodash';
+import { HotModuleReplacementPlugin } from 'webpack';
 import baseConfig from './webpack-base';
 
-export default assign({}, baseConfig, {
+const webpackConfig = defaultsDeep({
+  entry: {
+    webpackHot: 'webpack/hot/dev-server',
+    webpackDevServer: 'webpack-dev-server/client?http://localhost:3000/'
+  },
   output: {
-    path: '/',
-    filename: '[name]-[hash].js'
+    path: '/'
   }
-});
+}, baseConfig);
+
+webpackConfig.plugins.push(new HotModuleReplacementPlugin());
+
+export default webpackConfig;

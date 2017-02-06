@@ -10,7 +10,7 @@
     "clean-dist": "rimraf ./dist/*",
     "webpack:dev": "NODE_ENV=dev webpack --config webpack-dev.config.babel.js",
     "webpack:prod": "NODE_ENV=prod webpack --config webpack-prod.config.babel.js",
-    "start-dev-server": "NODE_ENV=dev babel-node webpack-dev-server.js"
+    "start-dev-server": "NODE_ENV=dev babel-node webpack-dev-server.js --hot --inline"
   },
   "dependencies": {
     "lodash": "^4.17.2"
